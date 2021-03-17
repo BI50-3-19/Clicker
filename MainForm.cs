@@ -8,11 +8,20 @@ namespace Clicker
     {
         private readonly Upgrade[] _clickUpgradesList = new Upgrade[5]
         {
-            new Upgrade( 20, 10, 0),
-            new Upgrade( 200, 25, 0),
-            new Upgrade( 500, 100, 0),
-            new Upgrade( 5000, 250, 0),
-            new Upgrade( 10000, 500, 0)
+            new Upgrade( 20, 10, UpgradeType.Click),
+            new Upgrade( 200, 25,  UpgradeType.Click),
+            new Upgrade( 500, 100,  UpgradeType.Click),
+            new Upgrade( 5000, 250,  UpgradeType.Click),
+            new Upgrade( 10000, 500,  UpgradeType.Click)
+        };
+
+        private readonly Upgrade[] _autoClickUpgradesList = new Upgrade[5]
+        {
+            new Upgrade( 20, 10, UpgradeType.AutoClick),
+            new Upgrade( 200, 25, UpgradeType.AutoClick),
+            new Upgrade( 500, 100, UpgradeType.AutoClick),
+            new Upgrade( 5000, 250, UpgradeType.AutoClick),
+            new Upgrade( 10000, 500, UpgradeType.AutoClick)
         };
 
         private Score _scoreData = new Score(0, 1, 0);
