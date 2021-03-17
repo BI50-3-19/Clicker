@@ -8,11 +8,11 @@ namespace Clicker
     {
         private readonly Upgrade[] _clickUpgradesList = new Upgrade[5]
         {
-            new Upgrade(0, 20, 10, 0),
-            new Upgrade(1, 200, 25, 0),
-            new Upgrade(2, 500, 100, 0),
-            new Upgrade(3, 5000, 250, 0),
-            new Upgrade(4, 10000, 500, 0)
+            new Upgrade( 20, 10, 0),
+            new Upgrade( 200, 25, 0),
+            new Upgrade( 500, 100, 0),
+            new Upgrade( 5000, 250, 0),
+            new Upgrade( 10000, 500, 0)
         };
 
         private Score _scoreData = new Score(0, 1, 0);

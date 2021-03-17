@@ -14,16 +14,14 @@ namespace Clicker
     {
         public Button Button;
 
-        private int ID;
         public Label Label;
         public int Price;
         public ProgressBar ProgressBar;
         public UpgradeType Type;
         public readonly int Value;
 
-        public Upgrade(int id, int price, int value, UpgradeType type)
+        public Upgrade(int price, int value, UpgradeType type)
         {
-            ID = id;
             Price = price;
             Value = value;
             Type = type;
