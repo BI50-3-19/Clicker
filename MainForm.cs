@@ -109,6 +109,13 @@ namespace Clicker
             RenderScorePerSecond();
         }
 
+        private void IntervalEventProcessor(object intervalTick, EventArgs e)
+        {
+            _scoreData.Value += _scoreData.PerSecond;
+            RenderScore();
+            UpdateUpgradesView();
+        }
+
         private void ClickOnMPT(object sender, EventArgs e)
         {
             _scoreData.Value += _scoreData.PerClick;
@@ -130,6 +137,13 @@ namespace Clicker
                         break;
                     case UpgradeType.AutoClick:
                         _scoreData.PerSecond += selectedUpgrade.Value;
+                        if (interval.Enabled == false)
+                        {
+                            interval.Enabled = true;
+                            interval.Tick += IntervalEventProcessor;
+                        }
+
+
                         break;
                     default:
                         return;
