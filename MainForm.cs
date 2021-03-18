@@ -5,7 +5,7 @@ namespace Clicker
 {
     public partial class MainForm : Form
     {
-        private readonly Upgrade[] _clickUpgradesList = new Upgrade[5]
+        private readonly Upgrade[] _clickUpgradesList =
         {
             new Upgrade( 20, 10, UpgradeType.Click),
             new Upgrade( 200, 25,  UpgradeType.Click),
@@ -14,7 +14,7 @@ namespace Clicker
             new Upgrade( 10000, 500,  UpgradeType.Click)
         };
 
-        private readonly Upgrade[] _autoClickUpgradesList = new Upgrade[5]
+        private readonly Upgrade[] _autoClickUpgradesList =
         {
             new Upgrade( 20, 10, UpgradeType.AutoClick),
             new Upgrade( 200, 25, UpgradeType.AutoClick),
