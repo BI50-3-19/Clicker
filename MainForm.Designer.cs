@@ -42,7 +42,7 @@ namespace Clicker
             this.clickUpgradesLabel = new System.Windows.Forms.Label();
             this.scoreProgress = new System.Windows.Forms.ProgressBar();
             this.autoClickUpgradesPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.autoClickUpgradesLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // ClickButton
@@ -118,28 +118,27 @@ namespace Clicker
             // 
             // autoClickUpgradesPanel
             // 
-            this.autoClickUpgradesPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.autoClickUpgradesPanel.Location = new System.Drawing.Point(646, 68);
             this.autoClickUpgradesPanel.Name = "autoClickUpgradesPanel";
             this.autoClickUpgradesPanel.Size = new System.Drawing.Size(276, 414);
             this.autoClickUpgradesPanel.TabIndex = 8;
             // 
-            // label1
+            // autoClickUpgradesLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(601, 19);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(321, 37);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "Улучшения автоклика";
+            this.autoClickUpgradesLabel.AutoSize = true;
+            this.autoClickUpgradesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.autoClickUpgradesLabel.Location = new System.Drawing.Point(601, 19);
+            this.autoClickUpgradesLabel.Name = "autoClickUpgradesLabel";
+            this.autoClickUpgradesLabel.Size = new System.Drawing.Size(321, 37);
+            this.autoClickUpgradesLabel.TabIndex = 9;
+            this.autoClickUpgradesLabel.Text = "Улучшения автоклика";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(934, 505);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.autoClickUpgradesLabel);
             this.Controls.Add(this.autoClickUpgradesPanel);
             this.Controls.Add(this.scoreProgress);
             this.Controls.Add(this.clickUpgradesLabel);
@@ -168,7 +167,7 @@ namespace Clicker
         private System.Windows.Forms.Label clickUpgradesLabel;
         private System.Windows.Forms.ProgressBar scoreProgress;
         private TableLayoutPanel autoClickUpgradesPanel;
-        private Label label1;
+        private Label autoClickUpgradesLabel;
     }
 }
 
