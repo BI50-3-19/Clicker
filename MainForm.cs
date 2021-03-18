@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics.Eventing.Reader;
 using System.Windows.Forms;
 
 namespace Clicker
@@ -99,7 +98,7 @@ namespace Clicker
 
         private void BuyUpgrade(object sender, EventArgs e)
         {
-            Button eventButton = sender as Button;
+            var eventButton = sender as Button;
             var selectedUpgrade = eventButton.Tag as Upgrade;
             if (_scoreData.Value >= selectedUpgrade.Price)
             {
@@ -112,6 +111,8 @@ namespace Clicker
                     case UpgradeType.AutoClick:
                         _scoreData.PerSecond += selectedUpgrade.Value;
                         break;
+                    default:
+                        return;
                 }
                 selectedUpgrade.UpdatePriceForUpgrade();
                 UpdateUpgradesView();
