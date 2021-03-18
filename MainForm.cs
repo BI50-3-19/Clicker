@@ -37,7 +37,7 @@ namespace Clicker
 
         private void BindUpgradesButton()
         {
-            foreach (var currentClickUpgrade in _clickUpgradesList)
+            foreach (var currentClickUpgrade in _clickUpgradesList.Concat(_autoClickUpgradesList))
             {
                 currentClickUpgrade.Button.Click += BuyUpgrade;
             }
