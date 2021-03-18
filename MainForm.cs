@@ -31,6 +31,7 @@ namespace Clicker
             BindUpgradesButton();
             Render();
             RenderClickUpgrades();
+            RenderAutoClickUpgrades();
         }
 
         private void BindUpgradesButton()
@@ -62,7 +63,20 @@ namespace Clicker
 
         private void RenderAutoClickUpgrades()
         {
+            autoClickUpgradesPanel.Controls.Clear();
+            autoClickUpgradesPanel.RowCount = 0;
+            for (var autoClickUpgradeIndex = 0; autoClickUpgradeIndex < _autoClickUpgradesList.Length; autoClickUpgradeIndex++)
+            {
+                var currentAutoClickUpgrade = _autoClickUpgradesList[autoClickUpgradeIndex];
 
+                autoClickUpgradesPanel.Controls.Add(currentAutoClickUpgrade.Button, 2, autoClickUpgradeIndex);
+                autoClickUpgradesPanel.Controls.Add(
+                    currentAutoClickUpgrade.Label, 3,
+                    autoClickUpgradeIndex);
+
+                autoClickUpgradesPanel.Controls.Add(
+                    currentAutoClickUpgrade.ProgressBar, 1, autoClickUpgradeIndex);
+            }
         }
 
         private void UpdateUpgradesView()

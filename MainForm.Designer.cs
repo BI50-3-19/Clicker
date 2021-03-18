@@ -92,7 +92,6 @@ namespace Clicker
             // 
             // clickUpgradesPanel
             // 
-            this.clickUpgradesPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.clickUpgradesPanel.Location = new System.Drawing.Point(12, 68);
             this.clickUpgradesPanel.Name = "clickUpgradesPanel";
             this.clickUpgradesPanel.Size = new System.Drawing.Size(276, 414);
