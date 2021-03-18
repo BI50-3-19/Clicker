@@ -30,7 +30,7 @@ namespace Clicker
             InitializeComponent();
             BindUpgradesButton();
             Render();
-            RenderClickUpgrade();
+            RenderClickUpgrades();
         }
 
         private void BindUpgradesButton()
@@ -41,7 +41,7 @@ namespace Clicker
             }
         }
 
-        private void RenderClickUpgrade()
+        private void RenderClickUpgrades()
         {
             clickUpgradesPanel.Controls.Clear();
             clickUpgradesPanel.RowCount = 0;
@@ -58,6 +58,11 @@ namespace Clicker
                 clickUpgradesPanel.Controls.Add(
                     currentClickUpgrade.ProgressBar, 3, clickUpgradeIndex);
             }
+        }
+
+        private void RenderAutoClickUpgrades()
+        {
+
         }
 
         private void UpdateUpgradesView()
