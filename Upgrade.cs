@@ -4,8 +4,8 @@ using System.Windows.Forms;
 
 public enum UpgradeType
 {
-    Click = 0,
-    AutoClick = 1
+    Click,
+    AutoClick
 }
 
 namespace Clicker
