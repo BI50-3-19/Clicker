@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Clicker
@@ -81,7 +82,7 @@ namespace Clicker
 
         private void UpdateUpgradesView()
         {
-            foreach (var selectedUpgrade in _clickUpgradesList)
+            foreach (var selectedUpgrade in _clickUpgradesList.Concat(_autoClickUpgradesList))
                 selectedUpgrade.UpdateView(_scoreData.Value);
         }
 
