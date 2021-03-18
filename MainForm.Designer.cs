@@ -41,7 +41,7 @@ namespace Clicker
             this.clickUpgradesPanel = new System.Windows.Forms.TableLayoutPanel();
             this.clickUpgradesLabel = new System.Windows.Forms.Label();
             this.scoreProgress = new System.Windows.Forms.ProgressBar();
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.autoClickUpgradesPanel = new System.Windows.Forms.TableLayoutPanel();
             this.SuspendLayout();
             // 
             // ClickButton
@@ -91,6 +91,7 @@ namespace Clicker
             // 
             // clickUpgradesPanel
             // 
+            this.clickUpgradesPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.clickUpgradesPanel.Location = new System.Drawing.Point(12, 68);
             this.clickUpgradesPanel.Name = "clickUpgradesPanel";
             this.clickUpgradesPanel.Size = new System.Drawing.Size(276, 414);
@@ -114,11 +115,20 @@ namespace Clicker
             this.scoreProgress.Size = new System.Drawing.Size(160, 44);
             this.scoreProgress.TabIndex = 7;
             // 
+            // autoClickUpgradesPanel
+            // 
+            this.autoClickUpgradesPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.autoClickUpgradesPanel.Location = new System.Drawing.Point(577, 68);
+            this.autoClickUpgradesPanel.Name = "autoClickUpgradesPanel";
+            this.autoClickUpgradesPanel.Size = new System.Drawing.Size(276, 414);
+            this.autoClickUpgradesPanel.TabIndex = 8;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(865, 505);
+            this.Controls.Add(this.autoClickUpgradesPanel);
             this.Controls.Add(this.scoreProgress);
             this.Controls.Add(this.clickUpgradesLabel);
             this.Controls.Add(this.clickUpgradesPanel);
@@ -127,6 +137,7 @@ namespace Clicker
             this.Controls.Add(this.scorePerSecondBox);
             this.Controls.Add(this.ClickButton);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "MainForm";
             this.Text = "MPT Clicker";
             this.ResumeLayout(false);
@@ -144,6 +155,7 @@ namespace Clicker
         private System.Windows.Forms.TableLayoutPanel clickUpgradesPanel;
         private System.Windows.Forms.Label clickUpgradesLabel;
         private System.Windows.Forms.ProgressBar scoreProgress;
+        private TableLayoutPanel autoClickUpgradesPanel;
     }
 }
 
