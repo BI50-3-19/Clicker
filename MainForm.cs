@@ -6,22 +6,22 @@ namespace Clicker
 {
     public partial class MainForm : Form
     {
-        private readonly Upgrade[] _clickUpgradesList =
-        {
-            new Upgrade( 20, 10, UpgradeType.Click),
-            new Upgrade( 200, 25,  UpgradeType.Click),
-            new Upgrade( 500, 100,  UpgradeType.Click),
-            new Upgrade( 5000, 250,  UpgradeType.Click),
-            new Upgrade( 10000, 500,  UpgradeType.Click)
-        };
-
         private readonly Upgrade[] _autoClickUpgradesList =
         {
-            new Upgrade( 20, 10, UpgradeType.AutoClick),
-            new Upgrade( 200, 25, UpgradeType.AutoClick),
-            new Upgrade( 500, 100, UpgradeType.AutoClick),
-            new Upgrade( 5000, 250, UpgradeType.AutoClick),
-            new Upgrade( 10000, 500, UpgradeType.AutoClick)
+            new Upgrade(20, 10, UpgradeType.AutoClick),
+            new Upgrade(200, 25, UpgradeType.AutoClick),
+            new Upgrade(500, 100, UpgradeType.AutoClick),
+            new Upgrade(5000, 250, UpgradeType.AutoClick),
+            new Upgrade(10000, 500, UpgradeType.AutoClick)
+        };
+
+        private readonly Upgrade[] _clickUpgradesList =
+        {
+            new Upgrade(20, 10, UpgradeType.Click),
+            new Upgrade(200, 25, UpgradeType.Click),
+            new Upgrade(500, 100, UpgradeType.Click),
+            new Upgrade(5000, 250, UpgradeType.Click),
+            new Upgrade(10000, 500, UpgradeType.Click)
         };
 
         private Score _scoreData = new Score(0, 1, 0);
@@ -38,9 +38,7 @@ namespace Clicker
         private void BindUpgradesButton()
         {
             foreach (var currentClickUpgrade in _clickUpgradesList.Concat(_autoClickUpgradesList))
-            {
                 currentClickUpgrade.Button.Click += BuyUpgrade;
-            }
         }
 
         private void RenderClickUpgrades()
@@ -66,7 +64,9 @@ namespace Clicker
         {
             autoClickUpgradesPanel.Controls.Clear();
             autoClickUpgradesPanel.RowCount = 0;
-            for (var autoClickUpgradeIndex = 0; autoClickUpgradeIndex < _autoClickUpgradesList.Length; autoClickUpgradeIndex++)
+            for (var autoClickUpgradeIndex = 0;
+                autoClickUpgradeIndex < _autoClickUpgradesList.Length;
+                autoClickUpgradeIndex++)
             {
                 var currentAutoClickUpgrade = _autoClickUpgradesList[autoClickUpgradeIndex];
 
@@ -143,11 +143,11 @@ namespace Clicker
                             interval.Tick += IntervalEventProcessor;
                         }
 
-
                         break;
                     default:
                         return;
                 }
+
                 selectedUpgrade.UpdatePriceForUpgrade();
                 UpdateUpgradesView();
                 Render();
@@ -156,7 +156,6 @@ namespace Clicker
             {
                 selectedUpgrade.Button.Enabled = false;
             }
-        
         }
     }
 }

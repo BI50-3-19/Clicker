@@ -1,5 +1,4 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 public enum UpgradeType
@@ -15,10 +14,10 @@ namespace Clicker
         public readonly Button Button;
 
         public readonly Label Label;
-        public int Price;
         public readonly ProgressBar ProgressBar;
         public readonly UpgradeType Type;
         public readonly int Value;
+        public int Price;
 
         public Upgrade(int price, int value, UpgradeType type)
         {
@@ -28,7 +27,6 @@ namespace Clicker
 
             Label = new Label
             {
-                Tag = this,
                 Text = $@"{price}",
                 TextAlign = ContentAlignment.MiddleCenter
             };
@@ -42,14 +40,13 @@ namespace Clicker
 
             ProgressBar = new ProgressBar
             {
-                Tag = this,
                 Maximum = price
             };
         }
 
         public void UpdatePriceForUpgrade()
         {
-            Price = (int)(Price * 1.4);
+            Price = (int) (Price * 1.4);
             Label.Text = $@"{Price}";
             ProgressBar.Maximum = Price;
         }
