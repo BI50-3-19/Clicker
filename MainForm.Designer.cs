@@ -153,6 +153,11 @@ namespace Clicker
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainFormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
+            if (interval.Enabled == false)
+            {
+               interval.Enabled = true;
+               interval.Tick += IntervalEventProcessor;
+            }
         }
 
         #endregion
