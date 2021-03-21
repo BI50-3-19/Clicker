@@ -150,6 +150,7 @@ namespace Clicker
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "MainForm";
             this.Text = "MPT Clicker";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainFormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
         }

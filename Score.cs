@@ -1,6 +1,6 @@
 ﻿namespace Clicker
 {
-    public struct Score
+    public  struct Score
     {
         public int Value;
         public int PerClick;

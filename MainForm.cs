@@ -1,38 +1,85 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Clicker
 {
     public partial class MainForm : Form
     {
-        private readonly Upgrade[] _autoClickUpgradesList =
-        {
-            new Upgrade(20, 10, UpgradeType.AutoClick),
-            new Upgrade(200, 25, UpgradeType.AutoClick),
-            new Upgrade(500, 100, UpgradeType.AutoClick),
-            new Upgrade(5000, 250, UpgradeType.AutoClick),
-            new Upgrade(10000, 500, UpgradeType.AutoClick)
-        };
-
-        private readonly Upgrade[] _clickUpgradesList =
-        {
-            new Upgrade(20, 10, UpgradeType.Click),
-            new Upgrade(200, 25, UpgradeType.Click),
-            new Upgrade(500, 100, UpgradeType.Click),
-            new Upgrade(5000, 250, UpgradeType.Click),
-            new Upgrade(10000, 500, UpgradeType.Click)
-        };
+        private readonly List<Upgrade> _clickUpgradesList = new List<Upgrade>();
+        private readonly List<Upgrade> _autoClickUpgradesList = new List<Upgrade>();
 
         private Score _scoreData = new Score(0, 1, 0);
+        private Save _save;
 
         public MainForm()
         {
             InitializeComponent();
+            LoadSave();
             BindUpgradesButton();
             Render();
             RenderClickUpgrades();
             RenderAutoClickUpgrades();
+        }
+
+        private void LoadSave()
+        {
+            UpgradeSave[] defaultUpgrades =
+            {
+                new UpgradeSave(20, 10, UpgradeType.Click),
+                new UpgradeSave(200, 25, UpgradeType.Click),
+                new UpgradeSave(500, 100, UpgradeType.Click),
+                new UpgradeSave(5000, 250, UpgradeType.Click),
+                new UpgradeSave(10000, 500, UpgradeType.Click),
+                
+                new UpgradeSave(20, 10, UpgradeType.AutoClick),
+                new UpgradeSave(200, 25, UpgradeType.AutoClick),
+                new UpgradeSave(500, 100, UpgradeType.AutoClick),
+                new UpgradeSave(5000, 250, UpgradeType.AutoClick),
+                new UpgradeSave(10000, 500, UpgradeType.AutoClick)
+            };
+            
+            _save = File.Exists("save.json")
+                ? JsonConvert.DeserializeObject<Save>(File.ReadAllText("save.json"))
+                : new Save(0, 1, 0, defaultUpgrades);
+
+            _scoreData.Value = _save.Score;
+            _scoreData.PerClick = _save.ScorePerClick;
+            _scoreData.PerSecond = _save.ScorePerSecond;
+            foreach (var upgrade in _save.Upgrades)
+            {
+                if (upgrade.Type == UpgradeType.Click)
+                {
+                    _clickUpgradesList.Add(new Upgrade(upgrade.Price, upgrade.Value, upgrade.Type));
+                } else if (upgrade.Type == UpgradeType.AutoClick)
+                {
+                    _autoClickUpgradesList.Add(new Upgrade(upgrade.Price, upgrade.Value, upgrade.Type));
+                } 
+            }
+        }
+
+        private void UpdateSaveData()
+        {
+            List<UpgradeSave> upgradesToSave = new List<UpgradeSave>();
+           _clickUpgradesList.ForEach(upgrade =>
+           {
+               upgradesToSave.Add(new UpgradeSave(upgrade.Price, upgrade.Value, upgrade.Type));
+           });
+           
+           _autoClickUpgradesList.ForEach(upgrade =>
+           {
+               upgradesToSave.Add(new UpgradeSave(upgrade.Price, upgrade.Value, upgrade.Type));
+           });
+            _save = new Save(_scoreData.Value, _scoreData.PerClick, _scoreData.PerSecond, upgradesToSave.ToArray());
+        }
+
+        private void WriteSave()
+        {
+            UpdateSaveData();
+            File.WriteAllText("save.json", JsonConvert.SerializeObject(_save));
         }
 
         private void BindUpgradesButton()
@@ -46,7 +93,7 @@ namespace Clicker
             clickUpgradesPanel.Controls.Clear();
             clickUpgradesPanel.RowCount = 0;
 
-            for (var clickUpgradeIndex = 0; clickUpgradeIndex < _clickUpgradesList.Length; clickUpgradeIndex++)
+            for (var clickUpgradeIndex = 0; clickUpgradeIndex < _clickUpgradesList.Count; clickUpgradeIndex++)
             {
                 var currentClickUpgrade = _clickUpgradesList[clickUpgradeIndex];
 
@@ -65,7 +112,7 @@ namespace Clicker
             autoClickUpgradesPanel.Controls.Clear();
             autoClickUpgradesPanel.RowCount = 0;
             for (var autoClickUpgradeIndex = 0;
-                autoClickUpgradeIndex < _autoClickUpgradesList.Length;
+                autoClickUpgradeIndex < _autoClickUpgradesList.Count;
                 autoClickUpgradeIndex++)
             {
                 var currentAutoClickUpgrade = _autoClickUpgradesList[autoClickUpgradeIndex];
@@ -122,7 +169,6 @@ namespace Clicker
             UpdateUpgradesView();
             RenderScore();
         }
-
         private void BuyUpgrade(object sender, EventArgs e)
         {
             var eventButton = sender as Button;
@@ -156,6 +202,11 @@ namespace Clicker
             {
                 selectedUpgrade.Button.Enabled = false;
             }
+        }
+
+        private void MainFormClosing(object sender, FormClosedEventArgs e)
+        { 
+            WriteSave();
         }
     }
 }

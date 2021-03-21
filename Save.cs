@@ -1,32 +1,32 @@
 ﻿namespace Clicker
 {
-    public struct UpgradeSave
+    public readonly struct UpgradeSave
     {
-        private int _price;
-        private int _value;
-        private UpgradeType _type;
+        public readonly int Price;
+        public readonly int Value;
+        public readonly UpgradeType Type;
 
         public UpgradeSave(int price, int value, UpgradeType type)
         {
-            _price = price;
-            _value = value;
-            _type = type;
+            Price = price;
+            Value = value;
+            Type = type;
         }
     }
 
-    public struct Save
+    public readonly struct  Save
     {
-        private int _score;
-        private int _scorePerClick;
-        private int _scorePerSecond;
-        private UpgradeSave[] _upgrades;
+        public readonly int Score;
+        public readonly int ScorePerClick;
+        public readonly int ScorePerSecond;
+        public readonly UpgradeSave[] Upgrades;
 
         public Save(int score, int scorePerClick, int scorePerSecond, UpgradeSave[] upgrades)
         {
-            _score = score;
-            _scorePerClick = scorePerClick;
-            _scorePerSecond = scorePerSecond;
-            _upgrades = upgrades;
+            Score = score;
+            ScorePerClick = scorePerClick;
+            ScorePerSecond = scorePerSecond;
+            Upgrades = upgrades;
         }
     }
 }
