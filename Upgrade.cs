@@ -12,12 +12,12 @@ namespace Clicker
 {
     public class Upgrade
     {
-        public Button Button;
+        public readonly Button Button;
 
-        public Label Label;
+        public readonly Label Label;
         public int Price;
-        public ProgressBar ProgressBar;
-        public UpgradeType Type;
+        public readonly ProgressBar ProgressBar;
+        public readonly UpgradeType Type;
         public readonly int Value;
 
         public Upgrade(int price, int value, UpgradeType type)

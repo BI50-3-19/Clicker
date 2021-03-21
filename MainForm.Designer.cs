@@ -26,8 +26,8 @@ namespace Clicker
         #region Код, автоматически созданный конструктором форм Windows
 
         /// <summary>
-        /// Требуемый метод для поддержки конструктора — не изменяйте 
-        /// содержимое этого метода с помощью редактора кода.
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
@@ -47,7 +47,7 @@ namespace Clicker
             // 
             // ClickButton
             // 
-            this.ClickButton.Image = ((System.Drawing.Image)(resources.GetObject("ClickButton.Image")));
+            this.ClickButton.Image = ((System.Drawing.Image) (resources.GetObject("ClickButton.Image")));
             this.ClickButton.Location = new System.Drawing.Point(389, 196);
             this.ClickButton.Name = "ClickButton";
             this.ClickButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -100,7 +100,7 @@ namespace Clicker
             // clickUpgradesLabel
             // 
             this.clickUpgradesLabel.AutoSize = true;
-            this.clickUpgradesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.clickUpgradesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
             this.clickUpgradesLabel.Location = new System.Drawing.Point(5, 19);
             this.clickUpgradesLabel.Name = "clickUpgradesLabel";
             this.clickUpgradesLabel.Size = new System.Drawing.Size(256, 37);
@@ -125,7 +125,7 @@ namespace Clicker
             // autoClickUpgradesLabel
             // 
             this.autoClickUpgradesLabel.AutoSize = true;
-            this.autoClickUpgradesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.autoClickUpgradesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
             this.autoClickUpgradesLabel.Location = new System.Drawing.Point(601, 19);
             this.autoClickUpgradesLabel.Name = "autoClickUpgradesLabel";
             this.autoClickUpgradesLabel.Size = new System.Drawing.Size(321, 37);
@@ -152,7 +152,6 @@ namespace Clicker
             this.Text = "MPT Clicker";
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
