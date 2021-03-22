@@ -1,19 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Clicker
 {
     public partial class MainForm : Form
     {
-        private readonly List<Upgrade> _clickUpgradesList = new List<Upgrade>();
         private readonly List<Upgrade> _autoClickUpgradesList = new List<Upgrade>();
+        private readonly List<Upgrade> _clickUpgradesList = new List<Upgrade>();
+        private Save _save;
 
         private Score _scoreData = new Score(0, 1, 0);
-        private Save _save;
 
         public MainForm()
         {
@@ -34,14 +34,14 @@ namespace Clicker
                 new UpgradeSave(500, 100, UpgradeType.Click),
                 new UpgradeSave(5000, 250, UpgradeType.Click),
                 new UpgradeSave(10000, 500, UpgradeType.Click),
-                
+
                 new UpgradeSave(20, 10, UpgradeType.AutoClick),
                 new UpgradeSave(200, 25, UpgradeType.AutoClick),
                 new UpgradeSave(500, 100, UpgradeType.AutoClick),
                 new UpgradeSave(5000, 250, UpgradeType.AutoClick),
                 new UpgradeSave(10000, 500, UpgradeType.AutoClick)
             };
-            
+
             _save = File.Exists("save.json")
                 ? JsonConvert.DeserializeObject<Save>(File.ReadAllText("save.json"))
                 : new Save(0, 1, 0, defaultUpgrades);
@@ -49,30 +49,31 @@ namespace Clicker
             _scoreData.Value = _save.Score;
             _scoreData.PerClick = _save.ScorePerClick;
             _scoreData.PerSecond = _save.ScorePerSecond;
-            foreach (var upgrade in _save.Upgrades)
+            if (_scoreData.PerSecond > 0 && interval.Enabled == false)
             {
-                if (upgrade.Type == UpgradeType.Click)
-                {
-                    _clickUpgradesList.Add(new Upgrade(upgrade.Price, upgrade.Value, upgrade.Type));
-                } else if (upgrade.Type == UpgradeType.AutoClick)
-                {
-                    _autoClickUpgradesList.Add(new Upgrade(upgrade.Price, upgrade.Value, upgrade.Type));
-                } 
+                interval.Enabled = true;
+                interval.Tick += IntervalEventProcessor;
             }
+            
+            foreach (var upgrade in _save.Upgrades)
+                if (upgrade.Type == UpgradeType.Click)
+                    _clickUpgradesList.Add(new Upgrade(upgrade.Price, upgrade.Value, upgrade.Type));
+                else if (upgrade.Type == UpgradeType.AutoClick)
+                    _autoClickUpgradesList.Add(new Upgrade(upgrade.Price, upgrade.Value, upgrade.Type));
         }
 
         private void UpdateSaveData()
         {
-            List<UpgradeSave> upgradesToSave = new List<UpgradeSave>();
-           _clickUpgradesList.ForEach(upgrade =>
-           {
-               upgradesToSave.Add(new UpgradeSave(upgrade.Price, upgrade.Value, upgrade.Type));
-           });
-           
-           _autoClickUpgradesList.ForEach(upgrade =>
-           {
-               upgradesToSave.Add(new UpgradeSave(upgrade.Price, upgrade.Value, upgrade.Type));
-           });
+            var upgradesToSave = new List<UpgradeSave>();
+            _clickUpgradesList.ForEach(upgrade =>
+            {
+                upgradesToSave.Add(new UpgradeSave(upgrade.Price, upgrade.Value, upgrade.Type));
+            });
+
+            _autoClickUpgradesList.ForEach(upgrade =>
+            {
+                upgradesToSave.Add(new UpgradeSave(upgrade.Price, upgrade.Value, upgrade.Type));
+            });
             _save = new Save(_scoreData.Value, _scoreData.PerClick, _scoreData.PerSecond, upgradesToSave.ToArray());
         }
 
@@ -169,6 +170,7 @@ namespace Clicker
             UpdateUpgradesView();
             RenderScore();
         }
+
         private void BuyUpgrade(object sender, EventArgs e)
         {
             var eventButton = sender as Button;
@@ -205,7 +207,7 @@ namespace Clicker
         }
 
         private void MainFormClosing(object sender, FormClosedEventArgs e)
-        { 
+        {
             WriteSave();
         }
     }
