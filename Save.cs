@@ -14,7 +14,7 @@
         }
     }
 
-    public readonly struct  Save
+    public readonly struct Save
     {
         public readonly int Score;
         public readonly int ScorePerClick;
