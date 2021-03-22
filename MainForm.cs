@@ -23,6 +23,7 @@ namespace Clicker
             Render();
             RenderClickUpgrades();
             RenderAutoClickUpgrades();
+            UpdateUpgradesView();
         }
 
         private void LoadSave()
