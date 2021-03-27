@@ -18,6 +18,7 @@ namespace Clicker
         public MainForm()
         {
             InitializeComponent();
+            RenderUpgradesPanels();
             LoadSave();
             BindUpgradesButton();
             Render();
@@ -90,10 +91,22 @@ namespace Clicker
                 currentClickUpgrade.Button.Click += BuyUpgrade;
         }
 
+        private void RenderUpgradesPanels()
+        {
+            clickUpgradesPanel.Location = new System.Drawing.Point(12, 68);
+            clickUpgradesPanel.Name = "clickUpgradesPanel";
+            clickUpgradesPanel.Size = new System.Drawing.Size(276, 414);
+
+            autoClickUpgradesPanel.Location = new System.Drawing.Point(646, 68);
+            autoClickUpgradesPanel.Name = "autoClickUpgradesPanel";
+            autoClickUpgradesPanel.Size = new System.Drawing.Size(276, 414);
+
+            Controls.Add(clickUpgradesPanel);
+            Controls.Add(autoClickUpgradesPanel);
+        }
+
         private void RenderClickUpgrades()
         {
-            clickUpgradesPanel.Controls.Clear();
-            clickUpgradesPanel.RowCount = 0;
 
             for (var clickUpgradeIndex = 0; clickUpgradeIndex < _clickUpgradesList.Count; clickUpgradeIndex++)
             {
