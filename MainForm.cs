@@ -43,16 +43,16 @@ namespace Clicker
                 new UpgradeSave(500, 100, UpgradeType.AutoClick),
                 new UpgradeSave(5000, 250, UpgradeType.AutoClick),
                 new UpgradeSave(10000, 500, UpgradeType.AutoClick)
-            };
+            }; // Создаём массив с улучшениями по умолчанию
 
             try
             {
                 _save = JsonConvert.DeserializeObject<Save>(File.ReadAllText("save.json"));
-            }
+            } // Пытаемся загрузить сохранение из файла save.json
             catch (Exception)
             {
                 _save = new Save(0, 1, 0, defaultUpgrades);
-            }
+            } // В случае неудачного чтения файла/его отсутствия/другой ошибки, ставим улучшения по умолчанию
 
             _scoreData.Value = _save.Score;
             _scoreData.PerClick = _save.ScorePerClick;
@@ -61,11 +61,11 @@ namespace Clicker
             {
                 interval.Enabled = true;
                 interval.Tick += IntervalEventProcessor;
-            }
+            } // В случае если в сохранении был автоклик, то запустить интервал
 
-            foreach (var upgrade in _save.Upgrades)
+            foreach (var upgrade in _save.Upgrades) // Перебор массива со всеми улучшениями, для их рендеринга
                 if (upgrade.Type == UpgradeType.Click)
-                    _clickUpgradesList.Add(new Upgrade(upgrade.Price, upgrade.Value, upgrade.Type));
+                    _clickUpgradesList.Add(new Upgrade(upgrade.Price, upgrade.Value, upgrade.Type)); 
                 else if (upgrade.Type == UpgradeType.AutoClick)
                     _autoClickUpgradesList.Add(new Upgrade(upgrade.Price, upgrade.Value, upgrade.Type));
         }
