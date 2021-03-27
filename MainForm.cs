@@ -44,9 +44,14 @@ namespace Clicker
                 new UpgradeSave(10000, 500, UpgradeType.AutoClick)
             };
 
-            _save = File.Exists("save.json")
-                ? JsonConvert.DeserializeObject<Save>(File.ReadAllText("save.json"))
-                : new Save(0, 1, 0, defaultUpgrades);
+            try
+            {
+                _save = JsonConvert.DeserializeObject<Save>(File.ReadAllText("save.json"));
+            }
+            catch (Exception)
+            {
+               _save =  new Save(0, 1, 0, defaultUpgrades);
+            }
 
             _scoreData.Value = _save.Score;
             _scoreData.PerClick = _save.ScorePerClick;
