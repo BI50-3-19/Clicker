@@ -100,11 +100,9 @@ namespace Clicker
         private void RenderUpgradesPanels()
         {
             clickUpgradesPanel.Location = new Point(12, 68);
-            clickUpgradesPanel.Name = "clickUpgradesPanel";
             clickUpgradesPanel.Size = new Size(276, 414);
 
             autoClickUpgradesPanel.Location = new Point(646, 68);
-            autoClickUpgradesPanel.Name = "autoClickUpgradesPanel";
             autoClickUpgradesPanel.Size = new Size(276, 414);
 
             Controls.Add(clickUpgradesPanel);
