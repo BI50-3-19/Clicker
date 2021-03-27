@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -50,7 +51,7 @@ namespace Clicker
             }
             catch (Exception)
             {
-               _save =  new Save(0, 1, 0, defaultUpgrades);
+                _save = new Save(0, 1, 0, defaultUpgrades);
             }
 
             _scoreData.Value = _save.Score;
@@ -61,7 +62,7 @@ namespace Clicker
                 interval.Enabled = true;
                 interval.Tick += IntervalEventProcessor;
             }
-            
+
             foreach (var upgrade in _save.Upgrades)
                 if (upgrade.Type == UpgradeType.Click)
                     _clickUpgradesList.Add(new Upgrade(upgrade.Price, upgrade.Value, upgrade.Type));
@@ -98,13 +99,13 @@ namespace Clicker
 
         private void RenderUpgradesPanels()
         {
-            clickUpgradesPanel.Location = new System.Drawing.Point(12, 68);
+            clickUpgradesPanel.Location = new Point(12, 68);
             clickUpgradesPanel.Name = "clickUpgradesPanel";
-            clickUpgradesPanel.Size = new System.Drawing.Size(276, 414);
+            clickUpgradesPanel.Size = new Size(276, 414);
 
-            autoClickUpgradesPanel.Location = new System.Drawing.Point(646, 68);
+            autoClickUpgradesPanel.Location = new Point(646, 68);
             autoClickUpgradesPanel.Name = "autoClickUpgradesPanel";
-            autoClickUpgradesPanel.Size = new System.Drawing.Size(276, 414);
+            autoClickUpgradesPanel.Size = new Size(276, 414);
 
             Controls.Add(clickUpgradesPanel);
             Controls.Add(autoClickUpgradesPanel);
@@ -112,7 +113,6 @@ namespace Clicker
 
         private void RenderClickUpgrades()
         {
-
             for (var clickUpgradeIndex = 0; clickUpgradeIndex < _clickUpgradesList.Count; clickUpgradeIndex++)
             {
                 var currentClickUpgrade = _clickUpgradesList[clickUpgradeIndex];
