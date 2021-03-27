@@ -63,7 +63,7 @@ namespace Clicker
                 interval.Tick += IntervalEventProcessor;
             } // В случае если в сохранении был автоклик, то запустить интервал
 
-            foreach (var upgrade in _save.Upgrades) // Перебор массива со всеми улучшениями, для их рендеринга
+            foreach (var upgrade in _save.Upgrades) // Перебор массива со всеми улучшениями, для их добавления в лист
                 if (upgrade.Type == UpgradeType.Click)
                     _clickUpgradesList.Add(new Upgrade(upgrade.Price, upgrade.Value, upgrade.Type)); 
                 else if (upgrade.Type == UpgradeType.AutoClick)
@@ -190,11 +190,11 @@ namespace Clicker
 
         private void BuyUpgrade(object sender, EventArgs e)
         {
-            var eventButton = sender as Button;
-            var selectedUpgrade = eventButton.Tag as Upgrade;
+            var eventButton = sender as Button; // Представление отправителя, как кнопки
+            var selectedUpgrade = eventButton.Tag as Upgrade; // Получение данных об улучшении
             if (_scoreData.Value >= selectedUpgrade.Price)
             {
-                _scoreData.Value -= selectedUpgrade.Price;
+                _scoreData.Value -= selectedUpgrade.Price; // Вычитание цены покупки из баланс
                 switch (selectedUpgrade.Type)
                 {
                     case UpgradeType.Click:
@@ -207,19 +207,17 @@ namespace Clicker
                             interval.Enabled = true;
                             interval.Tick += IntervalEventProcessor;
                         }
-
                         break;
                     default:
                         return;
                 }
-
                 selectedUpgrade.UpdatePriceForUpgrade();
                 UpdateUpgradesView();
                 Render();
             }
             else
             {
-                selectedUpgrade.Button.Enabled = false;
+                selectedUpgrade.Button.Enabled = false; // В случае нехватки денег, отключить возможность нажатия на кнопку
             }
         }
 
