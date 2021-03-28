@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -18,6 +19,7 @@ namespace Clicker
         public MainForm()
         {
             InitializeComponent();
+            RenderUpgradesPanels();
             LoadSave();
             BindUpgradesButton();
             Render();
@@ -41,11 +43,16 @@ namespace Clicker
                 new UpgradeSave(500, 100, UpgradeType.AutoClick),
                 new UpgradeSave(5000, 250, UpgradeType.AutoClick),
                 new UpgradeSave(10000, 500, UpgradeType.AutoClick)
-            };
+            }; // Создаём массив с улучшениями по умолчанию
 
-            _save = File.Exists("save.json")
-                ? JsonConvert.DeserializeObject<Save>(File.ReadAllText("save.json"))
-                : new Save(0, 1, 0, defaultUpgrades);
+            try
+            {
+                _save = JsonConvert.DeserializeObject<Save>(File.ReadAllText("save.json"));
+            } // Пытаемся загрузить сохранение из файла save.json
+            catch (Exception)
+            {
+                _save = new Save(0, 1, 0, defaultUpgrades);
+            } // В случае неудачного чтения файла/его отсутствия/другой ошибки, ставим улучшения по умолчанию
 
             _scoreData.Value = _save.Score;
             _scoreData.PerClick = _save.ScorePerClick;
@@ -54,11 +61,11 @@ namespace Clicker
             {
                 interval.Enabled = true;
                 interval.Tick += IntervalEventProcessor;
-            }
-            
-            foreach (var upgrade in _save.Upgrades)
+            } // В случае если в сохранении был автоклик, то запустить интервал
+
+            foreach (var upgrade in _save.Upgrades) // Перебор массива со всеми улучшениями, для их добавления в лист
                 if (upgrade.Type == UpgradeType.Click)
-                    _clickUpgradesList.Add(new Upgrade(upgrade.Price, upgrade.Value, upgrade.Type));
+                    _clickUpgradesList.Add(new Upgrade(upgrade.Price, upgrade.Value, upgrade.Type)); 
                 else if (upgrade.Type == UpgradeType.AutoClick)
                     _autoClickUpgradesList.Add(new Upgrade(upgrade.Price, upgrade.Value, upgrade.Type));
         }
@@ -90,11 +97,20 @@ namespace Clicker
                 currentClickUpgrade.Button.Click += BuyUpgrade;
         }
 
+        private void RenderUpgradesPanels()
+        {
+            clickUpgradesPanel.Location = new Point(12, 68);
+            clickUpgradesPanel.Size = new Size(276, 414);
+
+            autoClickUpgradesPanel.Location = new Point(646, 68);
+            autoClickUpgradesPanel.Size = new Size(276, 414);
+
+            Controls.Add(clickUpgradesPanel);
+            Controls.Add(autoClickUpgradesPanel);
+        }
+
         private void RenderClickUpgrades()
         {
-            clickUpgradesPanel.Controls.Clear();
-            clickUpgradesPanel.RowCount = 0;
-
             for (var clickUpgradeIndex = 0; clickUpgradeIndex < _clickUpgradesList.Count; clickUpgradeIndex++)
             {
                 var currentClickUpgrade = _clickUpgradesList[clickUpgradeIndex];
@@ -174,11 +190,11 @@ namespace Clicker
 
         private void BuyUpgrade(object sender, EventArgs e)
         {
-            var eventButton = sender as Button;
-            var selectedUpgrade = eventButton.Tag as Upgrade;
+            var eventButton = sender as Button; // Представление отправителя, как кнопки
+            var selectedUpgrade = eventButton.Tag as Upgrade; // Получение данных об улучшении
             if (_scoreData.Value >= selectedUpgrade.Price)
             {
-                _scoreData.Value -= selectedUpgrade.Price;
+                _scoreData.Value -= selectedUpgrade.Price; // Вычитание цены покупки из баланс
                 switch (selectedUpgrade.Type)
                 {
                     case UpgradeType.Click:
@@ -191,19 +207,17 @@ namespace Clicker
                             interval.Enabled = true;
                             interval.Tick += IntervalEventProcessor;
                         }
-
                         break;
                     default:
                         return;
                 }
-
                 selectedUpgrade.UpdatePriceForUpgrade();
                 UpdateUpgradesView();
                 Render();
             }
             else
             {
-                selectedUpgrade.Button.Enabled = false;
+                selectedUpgrade.Button.Enabled = false; // В случае нехватки денег, отключить возможность нажатия на кнопку
             }
         }
 

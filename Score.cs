@@ -2,9 +2,9 @@
 {
     public struct Score
     {
-        public int Value;
-        public int PerClick;
-        public int PerSecond;
+        public int Value; // Количество очков
+        public int PerClick; // Количество очков за клик
+        public int PerSecond; // Количество очков за секунду
 
         public Score(int inputValue, int inputPerClick, int inputPerSecond)
         {

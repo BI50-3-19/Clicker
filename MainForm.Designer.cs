@@ -38,16 +38,14 @@ namespace Clicker
             this.scorePerSecondBox = new System.Windows.Forms.TextBox();
             this.scorePerClickBox = new System.Windows.Forms.TextBox();
             this.scoreBox = new System.Windows.Forms.TextBox();
-            this.clickUpgradesPanel = new System.Windows.Forms.TableLayoutPanel();
             this.clickUpgradesLabel = new System.Windows.Forms.Label();
             this.scoreProgress = new System.Windows.Forms.ProgressBar();
-            this.autoClickUpgradesPanel = new System.Windows.Forms.TableLayoutPanel();
             this.autoClickUpgradesLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // ClickButton
             // 
-            this.ClickButton.Image = ((System.Drawing.Image) (resources.GetObject("ClickButton.Image")));
+            this.ClickButton.Image = ((System.Drawing.Image)(resources.GetObject("ClickButton.Image")));
             this.ClickButton.Location = new System.Drawing.Point(389, 196);
             this.ClickButton.Name = "ClickButton";
             this.ClickButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -90,17 +88,10 @@ namespace Clicker
             this.scoreBox.Text = "0";
             this.scoreBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // clickUpgradesPanel
-            // 
-            this.clickUpgradesPanel.Location = new System.Drawing.Point(12, 68);
-            this.clickUpgradesPanel.Name = "clickUpgradesPanel";
-            this.clickUpgradesPanel.Size = new System.Drawing.Size(276, 414);
-            this.clickUpgradesPanel.TabIndex = 5;
-            // 
             // clickUpgradesLabel
             // 
             this.clickUpgradesLabel.AutoSize = true;
-            this.clickUpgradesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
+            this.clickUpgradesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.clickUpgradesLabel.Location = new System.Drawing.Point(5, 19);
             this.clickUpgradesLabel.Name = "clickUpgradesLabel";
             this.clickUpgradesLabel.Size = new System.Drawing.Size(256, 37);
@@ -115,17 +106,10 @@ namespace Clicker
             this.scoreProgress.Size = new System.Drawing.Size(160, 44);
             this.scoreProgress.TabIndex = 7;
             // 
-            // autoClickUpgradesPanel
-            // 
-            this.autoClickUpgradesPanel.Location = new System.Drawing.Point(646, 68);
-            this.autoClickUpgradesPanel.Name = "autoClickUpgradesPanel";
-            this.autoClickUpgradesPanel.Size = new System.Drawing.Size(276, 414);
-            this.autoClickUpgradesPanel.TabIndex = 8;
-            // 
             // autoClickUpgradesLabel
             // 
             this.autoClickUpgradesLabel.AutoSize = true;
-            this.autoClickUpgradesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (204)));
+            this.autoClickUpgradesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.autoClickUpgradesLabel.Location = new System.Drawing.Point(601, 19);
             this.autoClickUpgradesLabel.Name = "autoClickUpgradesLabel";
             this.autoClickUpgradesLabel.Size = new System.Drawing.Size(321, 37);
@@ -138,10 +122,8 @@ namespace Clicker
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(934, 505);
             this.Controls.Add(this.autoClickUpgradesLabel);
-            this.Controls.Add(this.autoClickUpgradesPanel);
             this.Controls.Add(this.scoreProgress);
             this.Controls.Add(this.clickUpgradesLabel);
-            this.Controls.Add(this.clickUpgradesPanel);
             this.Controls.Add(this.scoreBox);
             this.Controls.Add(this.scorePerClickBox);
             this.Controls.Add(this.scorePerSecondBox);
@@ -153,6 +135,7 @@ namespace Clicker
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainFormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion
@@ -162,10 +145,10 @@ namespace Clicker
         private System.Windows.Forms.TextBox scorePerSecondBox;
         private System.Windows.Forms.TextBox scorePerClickBox;
         private System.Windows.Forms.TextBox scoreBox;
-        private System.Windows.Forms.TableLayoutPanel clickUpgradesPanel;
+        private System.Windows.Forms.TableLayoutPanel clickUpgradesPanel = new TableLayoutPanel();
+        private System.Windows.Forms.TableLayoutPanel autoClickUpgradesPanel = new TableLayoutPanel();
         private System.Windows.Forms.Label clickUpgradesLabel;
         private System.Windows.Forms.ProgressBar scoreProgress;
-        private TableLayoutPanel autoClickUpgradesPanel;
         private Label autoClickUpgradesLabel;
     }
 }
